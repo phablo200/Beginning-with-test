@@ -39,7 +39,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/** @test */
-
 	public function testCollecionCanIterated()
 	{
 		$collection = new \App\Support\Collection([
@@ -71,5 +70,41 @@ class CollectionTest extends \PHPUnit_Framework_TestCase {
 		$newCollection = $collection1->merge($collection2);
 		$this->assertCount(5, $newCollection->get());
 		$this->assertEquals(5, $newCollection->count());
+	}
+
+	/** @test */
+	public function testJsonEncodedCollection()
+	{
+		$collection = new \App\Support\Collection([
+			['username' => 'alex'],
+			['username' => 'billy']
+		]);
+
+		$encoded = json_encode([
+			['username' => 'alex'],
+			['username' => 'billy']
+		]);
+
+		$this->assertInternalType('string', $collection->toJson());
+		$this->assertEquals($encoded, $collection->toJson());
+	}
+
+	public function testCanSerialize()
+	{
+		$collection = new \App\Support\Collection([
+			['username' => 'alex'],
+			['username' => 'billy']
+		]);
+
+
+		$encoded = json_encode([
+			['username' => 'alex'],
+			['username' => 'billy']
+		]);
+
+		$encodedCollection = json_encode($collection);
+
+		$this->assertInternalType('string', $encodedCollection);
+		$this->assertEquals($encoded, $encodedCollection);
 	}
 }
