@@ -1,12 +1,11 @@
 # beginningWithTests
 a sample repository for tests with PhpUnit
 
-for running the class execute.
 
-cd beginningWithTests/
+to start the project runs: 
 
-then next
+composer update
 
-composer update // composer install
+then
 
 ./vendor/bin/phpunit
